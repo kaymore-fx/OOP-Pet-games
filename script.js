@@ -1,76 +1,55 @@
-// ____________________________________________
-//        Object-Oriented Programming (OOP)
-// ____________________________________________
-
 class Pet {
-    constructor(name, sound, image) {
+    constructor(name, soundText, image, soundUrl) {
       this.name = name;
-      this.sound = sound;
+      this.sound = soundText; // Assign the sound text to this.sound
+      this.soundUrl = new Audio(soundUrl);
       this.image = image;
       this.playCount = 0;
     }
   
     speak() {
-      alert(this.sound);
+      alert(this.sound); // Display the pet's sound text
+      this.soundUrl.currentTime = 0; // Restart the audio from the beginning
+      this.soundUrl.play();
+    
     }
   
     play() {
       this.playCount++;
       this.speak();
       updateCounter(this.playCount);
-      showFunActions(this.name);
+      showFunctions(this.name);
     }
   }
   
-  // Global variable to store the chosen pet
-  let currentPet = null;
-  
-  // ____________________________________________
-  //        Function to choose a pet
-  // ____________________________________________
   function choosePet(type) {
-    if (type === 'dog') {
-      currentPet = new Pet('Dog', 'Woof! 🐶', 'German-shepherd-dog-standing-in-a-field-on-a-bright-sunny-day_Francine-parent_Shutterstock.jpg');
+    if (type === 'cat') {
+      currentPet = new Pet('Cat', 'Meow! 🐱', 'images/silver-tabby-cat-sitting-on-green-background-free-photo.jpg', 'sounds/cat-meow-sound-383823.mp3');
+    } else if (type === 'dog') {
+      currentPet = new Pet('Dog', 'Woof! 🐶', 'images (1).jpeg', 'sounds/big-dog-barking-300504.mp3');
+    } else if (type === 'Gorilla') {
+      currentPet = new Pet('Gorilla', 'Roar! 🦍', 'images/892.webp', 'sounds/lion-roaring-sfx-293295.mp3');
+    } else if (type === 'Rabbit') {
+      currentPet = new Pet('Rabbit', 'screaming', 'images/images.jpeg', 'sounds/rabbit-sounds-358172.mp3');
     } else {
-      currentPet = new Pet('Cat', 'Meow! 🐱', '9fc07075-b758-4652-aa37-e8a5904e527c.avif');
+      alert('Unknown pet type');
+      return;
     }
   
-    document.getElementById('petImage').src = currentPet.image;
+    console.log('Selected pet:', currentPet);
+  
+    // Show the pet image and game area
+    const img = document.getElementById('petImage');
+    img.src = currentPet.image;
+    img.alt = currentPet.name;
+  
+    currentPet.playCount = 0;
+    document.getElementById('counter').innerText = 'Times played: 0';
     document.getElementById('game').style.display = 'block';
-    updateCounter(0);
-    showFunActions(currentPet.name);
   }
   
-  // ____________________________________________
-  //        Function to play with the pet
-  // ____________________________________________
   function playWithPet() {
     if (currentPet) {
       currentPet.play();
     }
   }
-  
-  // ____________________________________________
-  //        Function to update the counter
-  // ____________________________________________
-  function updateCounter(count) {
-    document.getElementById('counter').innerText = `Times played: ${count}`;
-  }
-  
-  // ____________________________________________
-  //        Function + Loop: Fun pet actions
-  // ____________________________________________
-  function showFunActions(petName) {
-    const actions = petName === 'Dog'
-      ? ['Bark', 'Wag Tail', 'Fetch Ball']
-      : ['Meow', 'Purr', 'Chase Mouse'];
-  
-    const actionBox = document.getElementById('actions');
-    actionBox.innerHTML = '<strong>Fun Actions:</strong><br>';
-  
-    // Loop through actions and show them
-    for (let i = 0; i < actions.length; i++) {
-      actionBox.innerHTML += '✅ ' + actions[i] + '<br>';
-    }
-  }
-  
