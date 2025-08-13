@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: rgb(43, 220, 226);
+    background-color: rgb(190, 192, 190);
     text-align: center;
     padding: 30px;
 }
@@ -38,3 +38,13 @@ button {
    #actions {
     margin-top: 20px;
    }
+
+  nav{
+ 
+ background-color: rgba(22, 20, 20, 0.894);
+ font-style: italic;
+ font-size: xx-;
+ padding: 2px;     
+                                                                                                                                                                                            
+
+  } 
